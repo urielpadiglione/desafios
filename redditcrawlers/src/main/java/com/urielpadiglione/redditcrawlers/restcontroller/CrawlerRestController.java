@@ -34,9 +34,11 @@ public class CrawlerRestController {
 	
 	//HTTP GET
 	@RequestMapping(value= "/redditcrawler/api/get/{tags}",  method = RequestMethod.GET)
-	public ResponseEntity<CrawlerResponseDTO> post(@PathVariable(value="tags") String tags){
+	public ResponseEntity<CrawlerResponseDTO> get(@PathVariable(value="tags") String tags){
 		CrawlerResponseDTO crawlerResponseDTO = new CrawlerResponseDTO();
 		crawlerResponseDTO.setResponse(crawlerService.getData(tags));
 		return new ResponseEntity<CrawlerResponseDTO>(crawlerResponseDTO,HttpStatus.ACCEPTED);
 	}
+	
+	
 }

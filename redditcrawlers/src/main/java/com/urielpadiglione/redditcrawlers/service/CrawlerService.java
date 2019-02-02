@@ -19,15 +19,16 @@ public class CrawlerService {
 	public List<String> getData(String tags) {
 		List<String> responseList = new ArrayList<String>();
 		
-		String[] subreddits = tags.split(";");
+		String[] subreddits = tags.split("-");
 		String threadLink="";
 		String commentsLink="";
 		String threadName="";
 	
-		try {
+		try {//https://www.reddit.com/r/datasets/comments/8c9f4j/i_have_implemented_a_crawler_for_reddit_data/
 			String url = "https://old.reddit.com";
 			
 			for(String sub : subreddits) {
+				logger.info("Subreddit: "+sub);
 				String response="";
 				
 				Document doc = Jsoup.connect(url+"/r/"+sub).get();
@@ -50,17 +51,17 @@ public class CrawlerService {
 							threadLink = el.getElementsByClass("thumbnail invisible-when-pinned may-blank outbound")
 									.attr("href").toString();
 							
-							logger.info("Subreddit: "+sub);
-							logger.info("Votes:"+votes);
-							logger.info("Name: "+threadName);
-							logger.info("Comments Link:"+commentsLink);
-							logger.info("External link: " +threadLink+"\n");
+							/*
+							 * logger.info("Subreddit: "+sub); logger.info("Votes:"+votes);
+							 * logger.info("Name: "+threadName); logger.info("Comments Link:"+commentsLink);
+							 * logger.info("External link: " +threadLink+"\n");
+							 */
 							
-							response+="Subreddit: "+sub+"\n";
+							response+="\n**Subreddit**: "+sub+"\n";
 							response+="Votes:"+votes+"\n";
 							response+="Name: "+threadName+"\n";
-							response+="Comments Link:"+commentsLink+"\n";
-							response+="External link: " +threadLink+"\n";
+							response+="Link:"+commentsLink+"\n";
+							response+="External link: " +threadLink+"\n\n\n";
 							responseList.add(response);
 							
 						}
