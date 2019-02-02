@@ -1,6 +1,8 @@
 package com.urielpadiglione.redditcrawlers.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -14,7 +16,9 @@ import org.springframework.stereotype.Service;
 public class CrawlerService {
 	Logger logger = LoggerFactory.getLogger(CrawlerService.class);
 
-	public void getData(String tags) {
+	public List<String> getData(String tags) {
+		List<String> responseList = new ArrayList<String>();
+		
 		String[] subreddits = tags.split(";");
 		String threadLink="";
 		String commentsLink="";
@@ -24,7 +28,8 @@ public class CrawlerService {
 			String url = "https://old.reddit.com";
 			
 			for(String sub : subreddits) {
-
+				String response="";
+				
 				Document doc = Jsoup.connect(url+"/r/"+sub).get();
 				Elements posts = doc.select("div[class*=\"thing id-\"]");
 
@@ -51,15 +56,24 @@ public class CrawlerService {
 							logger.info("Comments Link:"+commentsLink);
 							logger.info("External link: " +threadLink+"\n");
 							
+							response+="Subreddit: "+sub+"\n";
+							response+="Votes:"+votes+"\n";
+							response+="Name: "+threadName+"\n";
+							response+="Comments Link:"+commentsLink+"\n";
+							response+="External link: " +threadLink+"\n";
+							responseList.add(response);
+							
 						}
 
 					}
 
 				}
 			}
+			
+			return responseList;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erro ao ler página. Erro: "+e);
+			return null;
 		}
 		
 	}
