@@ -9,24 +9,25 @@ import com.urielpadiglione.redditcrawlers.component.CrawlerComponent;
 import com.urielpadiglione.redditcrawlers.service.CrawlerService;
 
 @SpringBootApplication
-public class RedditcrawlersApplication/* implements CommandLineRunner */{
+public class RedditcrawlersApplication implements CommandLineRunner{
 
-	/*
-	 * @Autowired CrawlerComponent crawlerComponent;
+	@Autowired 
+	CrawlerComponent crawlerComponent;
 	 
-	 * @Autowired CrawlerService crawlerService;
-	 */
+	@Autowired 
+	CrawlerService crawlerService;
+	 
 	
 	public static void main(String[] args) {
 		SpringApplication.run(RedditcrawlersApplication.class, args);
 	}
 
-	/*
-	 * @Override public void run(String... args) throws Exception {
-	 * crawlerService.getData(crawlerComponent.getTags());
-	 * 
-	 * }
-	 */
+	@Override 
+	public void run(String... args) throws Exception {
+		 crawlerService.getData(crawlerComponent.getTags());
+	
+	  }
+	 
 
 }
 

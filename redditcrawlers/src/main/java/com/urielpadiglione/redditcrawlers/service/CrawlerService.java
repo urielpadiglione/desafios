@@ -19,7 +19,7 @@ public class CrawlerService {
 	public List<String> getData(String tags) {
 		List<String> responseList = new ArrayList<String>();
 		
-		String[] subreddits = tags.split("-");
+		String[] subreddits = tags.split(";");
 		String threadLink="";
 		String commentsLink="";
 		String threadName="";
@@ -51,11 +51,13 @@ public class CrawlerService {
 							threadLink = el.getElementsByClass("thumbnail invisible-when-pinned may-blank outbound")
 									.attr("href").toString();
 							
-							/*
-							 * logger.info("Subreddit: "+sub); logger.info("Votes:"+votes);
-							 * logger.info("Name: "+threadName); logger.info("Comments Link:"+commentsLink);
-							 * logger.info("External link: " +threadLink+"\n");
-							 */
+							
+							logger.info("Subreddit: "+sub); 
+							logger.info("Votes:"+votes);
+							logger.info("Name: "+threadName); 
+							logger.info("Comments Link:"+commentsLink);
+							logger.info("External link: " +threadLink+"\n");
+							 
 							
 							response+="\nSubreddit: "+sub+"\n";
 							response+="Votes:"+votes+"\n";
