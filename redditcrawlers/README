@@ -1,0 +1,8 @@
+# INSTRUÇÕES DE USO
+
+A branch NO_WEB desse projeto refere-se a parte 1 do desafio do crawler, ou seja, este é um crawler que roda inteiramente no command line ou pela IDE, tendo suas variáveis alteradas ou no application.properties ou como parâmetros de inicialização do jar. Para executá-lo, basta rodar em qualquer IDE como aplicação java. Caso queiram gerar um jar, façam um clean install pelo maven do projeto e após o build terminar, usem o seguinte comando depois de fazer o 'cd' para dentro da pasta do jar:
+	java -jar redditcrawlers-0.0.1-SNAPSHOT.jar --tags="askreddit;pics"
+
+# PROCESSO DE RESOLUÇÃO
+
+Assim como citado no readme do master, a resolução foi simples pois a documentação do jsoup é muito boa e completa. Após carregar a página, bastou utilizar os seletores CSS para navegar entre os posts e pegar todas informações necessárias. No início, foi um pouco trabalhoso pois algumas classes HTML do reddit podem ser diferentes, então tive que usar seletores com "wildcard".
