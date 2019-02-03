@@ -1,0 +1,17 @@
+# INSTRUÇÕES DE USO
+
+Para o desafio das strings, existem duas maneiras de execução. 
+
+A primeira, é importar o projeto do git como MAVEN PROJECT e fica à critério do(a) avaliador(a) para alterar as variaveis, que ficam contidas dentro do application.properties dentro da pasta resource. Caso haja instalado o STS (Spring tool suite), é recomendado que a execução seja feita como um "Spring tool project", mas não há problemas em executar como Java Application.
+
+A segunda forma de execução desse desafio é através do jar, pelo prompt de comando. Ao importar o projeto, deve-se gerar o arquivo jar através do "clean install" do Maven. Após a geração do jar, o comando de execução com parâmetros variáveis é:
+  java -jar desafios-0.0.1-SNAPSHOT.jar --texto="Meu nome é uriel padiglione gomes oliveira, nascido em 13 de outubro de 1995, filho de francine padiglione e helio oliveira" --length=10
+  
+Caso a variável "--texto" ou "--length" não sejam preenchidas, o valor padrão será pegado do application.properties.
+
+
+# PROCESSO DE RESOLUÇÃO
+
+O processo de resolução foi simples. Após usar a biblioteca do apache commons para realizar o wrap do texto, precisei criar um array de strings, onde cada índice contém uma linha do texto total. Após obter isso e iniciar a iteração das linhas, precisei descobrir duas coisas: A subtração da length máxima da linha com a linha atual e a quantidade de espaços entre as palavras nessa linha. Depois de descobrir esses dois valores, fiz um sistema de distribuição utilizando os dois valores encontrados para saber exatamente quantos espaços devo colocar entre cada palavra. Tendo isso, o passo final foi somente quebrar a linha em um array de string contendo as palavras e distribuir a quantidade certa de espaços entre elas, no final, montando a string justificada da linha.
+
+Isso é repetido para cada linha do texto total.
