@@ -13,7 +13,7 @@ public class RedditcrawlersApplication/* implements CommandLineRunner */{
 
 	/*
 	 * @Autowired CrawlerComponent crawlerComponent;
-	 * 
+	 
 	 * @Autowired CrawlerService crawlerService;
 	 */
 	
