@@ -64,18 +64,22 @@ public class StringParseService {
 					}
 				}
 				
-				//numero de espaços para adicionar
-				int numberOfSpacesToAdd = numberOfSpaces/gaps;
+				int numberOfSpacesToAdd=0;
+				int remaining=0;
 				
-				//restante
-				int ramaining = numberOfSpaces % gaps;
+				if(gaps>0) {
+					//numero de espaços para adicionar
+					numberOfSpacesToAdd = numberOfSpaces/gaps;				
+					//restante
+					remaining = numberOfSpaces % gaps;
+				}
 				
 				//array que vai guardar a quantidade certa de espaços entre cada palavra
 				int[] spaces = new int[gaps+1]; // <--- o +1 é para manter o lenght desse array igual ao length do array "words" abaixo.
 				
 			    for (int i = 1; i <= gaps; i++)
 			    	{	//retorna 1 se a quantidade for menor ou igual a quantidade restante
-			            int extra = (i <= ramaining) ? 1:0; 
+			            int extra = (i <= remaining) ? 1:0; 
 			            
 			            //adiciona a quantidade certa de espaço entre as palavras.
 			            spaces[i-1]=numberOfSpacesToAdd + extra;
