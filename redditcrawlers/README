@@ -1,0 +1,7 @@
+# INSTRUÇÕES DE USO
+
+A branch MASTER desse projeto refere-se a parte 2 do desafio do crawler, ou seja, este é um microserviço que é uma REST API que comunica-se com o BOT do telegram. Para executar este serviço, basta alterar a porta no application.properties (o padrão está como 8080). Para testar, basta digitar "http://localhost:8080/redditcrawler/api/get/AskReddit" e assim conseguirá fazer o GET puro na aplicação. Caso queiram testar esta API REST junto com o bot, favor informa-me para que eu possa desligar o bot que está ativo na minha VM da Google Cloud.
+
+# PROCESSO DE RESOLUÇÃO
+
+O processo de resolução foi mais simples. Tenho extrema familiaridade com APIs REST e a documentação do jsoup é muito boa e completa. Após carregar a página, bastou utilizar os seletores CSS para navegar entre os posts e pegar todas informações necessárias. No início, foi um pouco trabalhoso pois algumas classes HTML do reddit podem ser diferentes, então tive que usar seletores com "wildcard".
