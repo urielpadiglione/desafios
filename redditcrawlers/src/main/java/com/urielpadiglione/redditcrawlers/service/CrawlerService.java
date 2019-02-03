@@ -57,7 +57,7 @@ public class CrawlerService {
 							 * logger.info("External link: " +threadLink+"\n");
 							 */
 							
-							response+="\n**Subreddit**: "+sub+"\n";
+							response+="\nSubreddit: "+sub+"\n";
 							response+="Votes:"+votes+"\n";
 							response+="Name: "+threadName+"\n";
 							response+="Link:"+commentsLink+"\n";
