@@ -1,7 +1,6 @@
 package com.urielpadiglione.redditcrawlers.service;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,17 +12,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlForm;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
 @Service
 public class CrawlerService {
 	Logger logger = LoggerFactory.getLogger(CrawlerService.class);
-	
-	public List<String> getData(String tags, int upvotes) {
+
+	public List<String> getData(String tags) {
 		List<String> responseList = new ArrayList<String>();
 		
 		String[] subreddits = tags.split("-");
@@ -36,19 +29,18 @@ public class CrawlerService {
 			
 			for(String sub : subreddits) {
 				logger.info("Subreddit: "+sub);
+				String response="";
 				
 				Document doc = Jsoup.connect(url+"/r/"+sub).get();
 				Elements posts = doc.select("div[class*=\"thing id-\"]");
 
 				for(Element el : posts) {
-					String response="";
-					
 					//pega upvotes e garante que não esteja vazio
 					if(!el.getElementsByClass("score unvoted").attr("title").toString().equals("")) {
 						//pega upvotes
 						Integer votes = Integer.valueOf(el.getElementsByClass("score unvoted").attr("title").toString());
 						
-						if(votes>=upvotes) {
+						if(votes>=5000) {
 							//pega link dos comentários
 							commentsLink = el.select("[class*=\"bylink comments may-blank\"]").attr("href").toString();
 							
@@ -58,7 +50,12 @@ public class CrawlerService {
 							//pega o link do conteudo quando for externo
 							threadLink = el.getElementsByClass("thumbnail invisible-when-pinned may-blank outbound")
 									.attr("href").toString();
-
+							
+							/*
+							 * logger.info("Subreddit: "+sub); logger.info("Votes:"+votes);
+							 * logger.info("Name: "+threadName); logger.info("Comments Link:"+commentsLink);
+							 * logger.info("External link: " +threadLink+"\n");
+							 */
 							
 							response+="\nSubreddit: "+sub+"\n";
 							response+="Votes:"+votes+"\n";
@@ -81,6 +78,4 @@ public class CrawlerService {
 		}
 		
 	}
-	
-	
 }

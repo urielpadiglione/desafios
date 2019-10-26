@@ -27,16 +27,16 @@ public class CrawlerRestController {
 	public ResponseEntity<CrawlerResponseDTO> post(@RequestBody SubredditsDTO subredditsDTO){
 		CrawlerResponseDTO crawlerResponseDTO = new CrawlerResponseDTO();
 
-		crawlerResponseDTO.setResponse(crawlerService.getData(subredditsDTO.getSubreddits(), subredditsDTO.getUpvotes()));
+		crawlerResponseDTO.setResponse(crawlerService.getData(subredditsDTO.getSubreddits()));
 		return new ResponseEntity<CrawlerResponseDTO>(crawlerResponseDTO,HttpStatus.ACCEPTED);
 	}
 	
 	
 	//HTTP GET
-	@RequestMapping(value= "/redditcrawler/api/get/{tags}/{upvotes}",  method = RequestMethod.GET)
-	public ResponseEntity<CrawlerResponseDTO> get(@PathVariable(value="tags") String tags, @PathVariable(value="upvotes") int upvotes){
+	@RequestMapping(value= "/redditcrawler/api/get/{tags}",  method = RequestMethod.GET)
+	public ResponseEntity<CrawlerResponseDTO> get(@PathVariable(value="tags") String tags){
 		CrawlerResponseDTO crawlerResponseDTO = new CrawlerResponseDTO();
-		crawlerResponseDTO.setResponse(crawlerService.getData(tags, upvotes));
+		crawlerResponseDTO.setResponse(crawlerService.getData(tags));
 		return new ResponseEntity<CrawlerResponseDTO>(crawlerResponseDTO,HttpStatus.ACCEPTED);
 	}
 	
